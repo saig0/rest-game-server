@@ -23,7 +23,7 @@ object Application extends Controller {
 		}
 	}
 
-	def games = Action { implicit request =>
+	def getGames = Action { implicit request =>
 		Ok(Json.toJson(Game.all.map(Game.asJson(_))))
 	}
 
