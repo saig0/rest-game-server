@@ -6,8 +6,9 @@
 GET     /                           controllers.Application.index
 
 # Game Serives
-PUT		/games						controllers.Application.createGame
+POST	/games						controllers.Application.createGame
 GET		/games						controllers.Application.getGames
+PUT		/games/:id					controllers.Application.updateGame(id: Long)
 DELETE	/games/:id					controllers.Application.deleteGame(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path

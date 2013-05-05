@@ -1,30 +1,33 @@
 package models
 
 import play.api.libs.json.Json
+import play.api.libs.json.JsValue
 
-case class Game(id: Long, address: String)
+case class Game(id: Long, address: String, maxPlayers: Int, currentPlayers: Int)
 
-object Game extends JsonDto[Game] {
+object Game {
 
 	var games = List[Game]().toBuffer
 
 	def all: List[Game] = games.toList
 
-	def create(address: String): Game = {
+	def create(address: String, maxPlayers: Int, currentPlayers: Int): Game = {
 		val id = games.size
-		val newGame = Game(id, address)
+		val newGame = Game(id, address, maxPlayers, currentPlayers)
 		games += newGame
 		newGame
+	}
+
+	def update(id: Long, maxPlayers: Int, currentPlayers: Int) {
+		val game = games(id.toInt)
+		games -= game
+		create(game.address, maxPlayers, currentPlayers)
 	}
 
 	def delete(id: Long) {
 		games -= games(id.toInt)
 	}
 
-	def asJson(game: Game) = Map(
-		"id" -> asJson(game.id),
-		"address" -> asJson(game.address)
-	)
-
 	implicit val gameReads = Json.reads[Game]
+	implicit val gameWrites = Json.writes[Game]
 }
