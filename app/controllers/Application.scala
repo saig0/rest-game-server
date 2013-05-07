@@ -20,10 +20,18 @@ object Application extends Controller with JsonRequest {
 
 	def createGame = Action(parse.json) { implicit request =>
 		jsonRequest[Game] { newGame =>
-			val game = Game.create(newGame.address, newGame.maxPlayers, newGame.currentPlayers)
+			val address = getAddressOfRequest(request)
+			val game = Game.create(address, newGame.maxPlayers, newGame.currentPlayers)
 			Ok(Json.toJson(game))
 		}
 	}
+
+	/**
+	 * Die IP-Addresse des Senders ist im Header des Request unter dem Attribut X-FORWARDED-FOR abgelegt.
+	 * Da diese Methode beim lokalen Test nicht funktioniert, wird ein LOCALHOST zurückgegeben.
+	 */
+	private def getAddressOfRequest(request: Request[Any]): String =
+		request.headers.get("X-FORWARDED-FOR") getOrElse ("localhost")
 
 	def getGames = Action { implicit request =>
 		Ok(Json.toJson(Game.all))
