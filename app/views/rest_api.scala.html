@@ -1,0 +1,39 @@
+
+@main("Game-Server") {
+ 
+ <h1>REST-API</h1>
+ 
+ <table border="1" style="border-collapse: collapse;">
+ 	<thead>
+ 		<tr>
+ 			<th style="width: 75px;">methode</th>
+ 			<th style="width: 150px;">path</th>
+ 			<th style="width: 400px;">description</th>
+ 		</tr>
+ 	</thead>
+ 	<tbody>
+ 		<tr>
+ 			<td>POST</td>
+ 			<td>/games</td>
+			<td>Neues Spiel anlegen</td>
+		</tr>
+		<tr>
+ 			<td>GET</td>
+ 			<td>/games</td>
+			<td>Vorhandene Spiele abfragen</td>
+		</tr>
+		<tr>
+ 			<td>PUT</td>
+ 			<td>/games/:id</td>
+			<td>Spiel aktualisieren</td>
+		</tr>
+		<tr>
+ 			<td>DELETE</td>
+ 			<td>/games/:id</td>
+			<td>Spiel entfernen</td>
+		</tr>
+ 	</tbody>
+ </table>   
+
+    
+}

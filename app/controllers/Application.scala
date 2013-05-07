@@ -15,7 +15,7 @@ import play.api.libs.json.Reads
 object Application extends Controller with JsonRequest {
 
 	def index = Action {
-		Ok(views.html.index("Your new application is ready."))
+		Ok(views.html.rest_api())
 	}
 
 	def createGame = Action(parse.json) { implicit request =>
