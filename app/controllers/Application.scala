@@ -39,7 +39,7 @@ object Application extends Controller with JsonRequest {
 
 	def updateGame(id: Long) = Action(parse.json) { implicit request =>
 		jsonRequest[Game] { updatedGame =>
-			Game.update(id, updatedGame.maxPlayers, updatedGame.currentPlayers)
+			Game.update(id, updatedGame)
 			Ok
 		}
 	}
